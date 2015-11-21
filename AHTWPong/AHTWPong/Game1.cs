@@ -104,6 +104,8 @@ namespace AHTWPong
             {
                 state = GameState.PRE_GAME;
                 ball.Reset();
+                playerOne.Reset();
+                playerTwo.Reset();
             }
 
             // TODO: Add your update logic here

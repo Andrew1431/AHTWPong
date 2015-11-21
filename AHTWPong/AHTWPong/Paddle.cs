@@ -19,7 +19,7 @@ namespace AHTWPong
     {
         const float PADDLE_SPEED = 5f;
 
-        Vector2 position, screenSize;
+        Vector2 position, screenSize, initialPosition;
         Texture2D texture;
         SpriteBatch spriteBatch;
         int player;
@@ -30,7 +30,7 @@ namespace AHTWPong
         {
             // TODO: Construct any child components here
             this.game = game;
-            this.position = position;
+            this.position = initialPosition = position;
             this.texture = texture;
             this.spriteBatch = spriteBatch;
             this.screenSize = screenSize;
@@ -47,6 +47,11 @@ namespace AHTWPong
 
 
             base.Initialize();
+        }
+
+        public void Reset()
+        {
+            this.position = initialPosition;
         }
 
         /// <summary>
