@@ -11,18 +11,26 @@ using Microsoft.Xna.Framework.Media;
 
 namespace AHTWPong
 {
+    public enum GameState { PRE_GAME, GAME, POST_GAME }
     /// <summary>
     /// This is the main type for your game
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
+        public const int PLAYER_ONE = 1;
+        public const int PLAYER_TWO = 2;
+        public GameState state;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Paddle playerOne, playerTwo;
+        Ball ball;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            IsMouseVisible = true;
         }
 
         /// <summary>
@@ -47,6 +55,22 @@ namespace AHTWPong
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            Texture2D paddleLeft = Content.Load<Texture2D>("images/BatLeft");
+            Texture2D paddleRight = Content.Load<Texture2D>("images/BatRight");
+            Texture2D ball = Content.Load<Texture2D>("images/Ball");
+
+            Vector2 screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+
+            this.state = GameState.PRE_GAME;
+
+            playerOne = new Paddle(this, new Vector2(1, graphics.PreferredBackBufferHeight / 2 - (paddleLeft.Height / 2)), paddleLeft, spriteBatch, PLAYER_ONE, screenSize);
+            playerTwo = new Paddle(this, new Vector2(graphics.PreferredBackBufferWidth - 1 - paddleRight.Width, graphics.PreferredBackBufferHeight / 2 - (paddleRight.Height / 2)), paddleRight, spriteBatch, PLAYER_TWO, screenSize);
+            this.ball = new Ball(this, spriteBatch, ball, new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2), new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight));
+
+            Components.Add(playerOne);
+            Components.Add(playerTwo);
+            Components.Add(this.ball);
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -67,8 +91,20 @@ namespace AHTWPong
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter) && state == GameState.PRE_GAME)
+            {
+                state = GameState.GAME;
+                ball.Launch();
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.R) && (state == GameState.GAME))
+            {
+                state = GameState.PRE_GAME;
+                ball.Reset();
+            }
 
             // TODO: Add your update logic here
 
