@@ -25,6 +25,18 @@ namespace AHTWPong
         int player;
         Game1 game;
 
+        public Vector2 Position
+        {
+            get { return position; }
+            set { position = value; }
+        }
+
+        public Texture2D Texture
+        {
+            get { return texture; }
+            set { texture = value; }
+        }
+
         public Paddle(Game1 game, Vector2 position, Texture2D texture, SpriteBatch spriteBatch, int playerNumber, Vector2 screenSize)
             : base(game)
         {
@@ -52,6 +64,11 @@ namespace AHTWPong
         public void Reset()
         {
             this.position = initialPosition;
+        }
+
+        public Rectangle GetCollisionRectangle()
+        {
+            return new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
 
         /// <summary>

@@ -23,8 +23,16 @@ namespace AHTWPong
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Paddle playerOne, playerTwo;
-        Ball ball;
+        public Paddle playerOne, playerTwo;
+        public Ball ball;
+        Vector2 screenSize;
+        CollisionManager collisions;
+
+        public Vector2 ScreenSize
+        {
+            get { return screenSize; }
+            set { screenSize = value; }
+        }
 
         public Game1()
         {
@@ -59,17 +67,19 @@ namespace AHTWPong
             Texture2D paddleRight = Content.Load<Texture2D>("images/BatRight");
             Texture2D ball = Content.Load<Texture2D>("images/Ball");
 
-            Vector2 screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+            screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 
             this.state = GameState.PRE_GAME;
 
             playerOne = new Paddle(this, new Vector2(1, graphics.PreferredBackBufferHeight / 2 - (paddleLeft.Height / 2)), paddleLeft, spriteBatch, PLAYER_ONE, screenSize);
             playerTwo = new Paddle(this, new Vector2(graphics.PreferredBackBufferWidth - 1 - paddleRight.Width, graphics.PreferredBackBufferHeight / 2 - (paddleRight.Height / 2)), paddleRight, spriteBatch, PLAYER_TWO, screenSize);
             this.ball = new Ball(this, spriteBatch, ball, new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2), new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight));
+            collisions = new CollisionManager(this);
 
             Components.Add(playerOne);
             Components.Add(playerTwo);
             Components.Add(this.ball);
+            Components.Add(collisions);
 
             // TODO: use this.Content to load your game content here
         }

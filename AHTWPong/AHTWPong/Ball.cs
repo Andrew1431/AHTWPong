@@ -20,8 +20,21 @@ namespace AHTWPong
         SpriteBatch spriteBatch;
         Vector2 position, screenSize;
         float speed, direction;
+        public Vector2 Velocity;
         Texture2D texture;
         Game1 game;
+
+        public Vector2 Position
+        {
+            get { return position; }
+            set { position = value; }
+        }
+
+        public Texture2D Texture
+        {
+            get { return texture; }
+            set { texture = value; }
+        }
 
         public Ball(Game1 game, SpriteBatch spriteBatch, Texture2D texture, Vector2 position, Vector2 screenSize)
             : base(game)
@@ -49,7 +62,10 @@ namespace AHTWPong
         {
             Random r = new Random();
             direction = (float)r.NextDouble();
-            speed = r.Next(3, 10);
+            speed = r.Next(3, 7);
+            float x = (float)Math.Cos((double)(direction * 2 * Math.PI)) * speed;
+            float y = (float)Math.Sin((double)(direction * 2 * Math.PI)) * speed;
+            Velocity = new Vector2(x, y);
         }
 
         public void Reset()
@@ -58,6 +74,12 @@ namespace AHTWPong
             position.Y = screenSize.Y / 2;
             direction = 0;
             speed = 0;
+            Velocity = Vector2.Zero;
+        }
+
+        public Rectangle GetCollisionRectangle()
+        {
+            return new Rectangle((int)position.X - texture.Width / 2, (int)position.Y - texture.Height, texture.Width, texture.Height);
         }
 
         /// <summary>
@@ -68,8 +90,8 @@ namespace AHTWPong
         {
             // TODO: Add your update code here
 
-            position.X += (float)Math.Cos((double)(direction * 2 * Math.PI)) * speed;
-            position.Y += (float)Math.Sin((double)(direction * 2 * Math.PI)) * speed;
+            position.X += Velocity.X;
+            position.Y += Velocity.Y;
 
             base.Update(gameTime);
         }
