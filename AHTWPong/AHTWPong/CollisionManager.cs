@@ -69,10 +69,13 @@ namespace AHTWPong
             else if (ball.Position.X - ball.Texture.Width / 2 < 0)
             {
                 // player one score logic here
+                Game1.player_one_score++;
+               
             }
             else if (ball.Position.X + ball.Texture.Width / 2 > game.ScreenSize.X)
             {
                 // player two score logic here
+                Game1.player_two_score++;
             }
 
 

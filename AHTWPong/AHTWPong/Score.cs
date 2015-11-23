@@ -20,7 +20,13 @@ namespace AHTWPong
         private SpriteBatch spriteBatch;
         private SpriteFont font;
         private Vector2 position;
-        private string score;
+        private string scoreString;
+
+        public string ScoreString
+        {
+            get { return scoreString; }
+            set { scoreString = value; }
+        }
         private Color color;
 
         public Color Color
@@ -29,18 +35,10 @@ namespace AHTWPong
             set { color = value; }
         }
 
-        public string Score1
-        {
-            get { return score; }
-            set { score = value; }
-        }
-
-
-
         public Score(Game game, SpriteBatch spriteBatch,
             SpriteFont font,
             Vector2 position,
-            string score,
+            string scoreString,
             Color color)
             : base(game)
         {
@@ -48,7 +46,7 @@ namespace AHTWPong
             this.spriteBatch = spriteBatch;
             this.font = font;
             this.position = position;
-            this.score = score;
+            this.scoreString = scoreString;
             this.color = color;
         }
 
@@ -77,7 +75,7 @@ namespace AHTWPong
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            spriteBatch.DrawString(font, score, position, color);
+            spriteBatch.DrawString(font, scoreString, position, color);
             spriteBatch.End();
             base.Draw(gameTime);
         }
