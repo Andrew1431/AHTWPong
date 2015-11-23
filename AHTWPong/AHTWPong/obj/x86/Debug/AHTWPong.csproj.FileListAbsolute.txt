@@ -12,3 +12,7 @@ C:\Users\Andrew\Documents\GitHub\AHTWPong\AHTWPong\AHTWPong\obj\x86\Debug\AHTWPo
 C:\Users\Andrew\Documents\GitHub\AHTWPong\AHTWPong\AHTWPong\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Andrew\Documents\GitHub\AHTWPong\AHTWPong\AHTWPong\obj\x86\Debug\AHTWPong.exe
 C:\Users\Andrew\Documents\GitHub\AHTWPong\AHTWPong\AHTWPong\obj\x86\Debug\AHTWPong.pdb
+\\Mac\Home\Documents\Git\School\gameProgramming\AHTWPong\AHTWPong\AHTWPong\obj\x86\Debug\AHTWPong.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\Git\School\gameProgramming\AHTWPong\AHTWPong\AHTWPong\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+\\Mac\Home\Documents\Git\School\gameProgramming\AHTWPong\AHTWPong\AHTWPong\obj\x86\Debug\AHTWPong.exe
+\\Mac\Home\Documents\Git\School\gameProgramming\AHTWPong\AHTWPong\AHTWPong\obj\x86\Debug\AHTWPong.pdb
