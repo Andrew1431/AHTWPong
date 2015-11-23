@@ -31,6 +31,7 @@ namespace AHTWPong
 
         GraphicsDeviceManager graphics;
         SpriteFont font;
+        SpriteFont winFont;
         SpriteBatch spriteBatch;
         public Paddle playerOne, playerTwo;
         public Ball ball;
@@ -79,6 +80,7 @@ namespace AHTWPong
             Texture2D paddleRight = Content.Load<Texture2D>("images/BatRight");
             Texture2D ball = Content.Load<Texture2D>("images/Ball");
             font = Content.Load<SpriteFont>("fonts/SpriteFont1");
+            winFont = Content.Load<SpriteFont>("fonts/SpriteFont2");
             Click = Content.Load<SoundEffect>("audio/click");
             Applause = Content.Load<SoundEffect>("audio/applause1");
             Ding = Content.Load<SoundEffect>("audio/ding");
@@ -96,14 +98,15 @@ namespace AHTWPong
             Vector2 scorePosition = Vector2.Zero;
             Vector2 winMessagePosition = new Vector2(graphics.PreferredBackBufferWidth /2, graphics.PreferredBackBufferHeight /2);
             score = new Score(this, spriteBatch, font, scorePosition, scoreString, Color.White);
-            winMessage = new Score(this, spriteBatch, font, winMessagePosition, winMessageString, Color.AliceBlue);
+            winMessage = new Score(this, spriteBatch, winFont, winMessagePosition, winMessageString, Color.Red);
             winMessage.Visible = false;
-            Components.Add(winMessage);
+            
             Components.Add(score);
             Components.Add(playerOne);
             Components.Add(playerTwo);
             Components.Add(this.ball);
             Components.Add(collisions);
+            Components.Add(winMessage);
 
             // TODO: use this.Content to load your game content here
         }
@@ -153,6 +156,7 @@ namespace AHTWPong
                 player_one_score = 0;
                 player_two_score = 0;
                 ball.Reset();
+                ball.Visible = true;
                 playerOne.Reset();
                 playerTwo.Reset();
             }
@@ -168,7 +172,7 @@ namespace AHTWPong
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.NavajoWhite);
+            GraphicsDevice.Clear(Color.DeepSkyBlue);
 
             // TODO: Add your drawing code here
 
@@ -180,11 +184,12 @@ namespace AHTWPong
             state = GameState.POST_GAME;
             //Applause.Play();
             string winMessageString = "Congratulations " + winner;
-            Vector2 dimension = font.MeasureString(winMessageString);
+            Vector2 dimension = winFont.MeasureString(winMessageString);
             Vector2 messagePos = new Vector2(graphics.PreferredBackBufferWidth / 2 - dimension.X / 2, graphics.PreferredBackBufferHeight / 2 - dimension.Y / 2);
             winMessage.ScoreString = winMessageString;
             winMessage.Position = messagePos;
             winMessage.Visible = true;
+            ball.Visible = false;
             ball.Reset();
             playerOne.Reset();
             playerTwo.Reset();
