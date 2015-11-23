@@ -20,15 +20,19 @@ namespace AHTWPong
         public const int PLAYER_ONE = 1;
         public const int PLAYER_TWO = 2;
         public GameState state;
+        public static int player_one_score = 0;
+        public static int player_two_score = 0;
 
         GraphicsDeviceManager graphics;
+        SpriteFont font;
         SpriteBatch spriteBatch;
         public Paddle playerOne, playerTwo;
         public Ball ball;
         Vector2 screenSize;
         CollisionManager collisions;
+        public Score score;
 
-        public SoundEffect Applause, Click, Ding;
+        public SoundEffect Click, Applause, Ding;
 
         public Vector2 ScreenSize
         {
@@ -68,6 +72,7 @@ namespace AHTWPong
             Texture2D paddleLeft = Content.Load<Texture2D>("images/BatLeft");
             Texture2D paddleRight = Content.Load<Texture2D>("images/BatRight");
             Texture2D ball = Content.Load<Texture2D>("images/Ball");
+            font = Content.Load<SpriteFont>("fonts/SpriteFont1");
             Applause = Content.Load<SoundEffect>("audio/applause1");
             Click = Content.Load<SoundEffect>("audio/click");
             Ding = Content.Load<SoundEffect>("audio/ding");
@@ -81,6 +86,12 @@ namespace AHTWPong
             this.ball = new Ball(this, spriteBatch, ball, new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2), new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight));
             collisions = new CollisionManager(this);
 
+            string scoreString = "";
+            Vector2 scorePosition = Vector2.Zero;
+            score = new Score(this, spriteBatch, font, scorePosition, scoreString, Color.White);
+
+
+            Components.Add(score);
             Components.Add(playerOne);
             Components.Add(playerTwo);
             Components.Add(this.ball);
@@ -105,6 +116,10 @@ namespace AHTWPong
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            // Score
+            string scoreMessage = "Player One: " + player_one_score.ToString() + "\nPlayer Two: " + player_two_score.ToString();
+            score.ScoreString = scoreMessage;
+
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();

@@ -74,13 +74,13 @@ namespace AHTWPong
             else if (ball.Position.X - ball.Texture.Width / 2 < 0)
             {
                 game.Ding.Play();
-                // player one score logic here
+                Game1.player_one_score++;
             }
             // Right paddle hit
             else if (ball.Position.X + ball.Texture.Width / 2 > game.ScreenSize.X)
             {
                 game.Ding.Play();
-                // player two score logic here
+                Game1.player_two_score++;
             }
 
 
