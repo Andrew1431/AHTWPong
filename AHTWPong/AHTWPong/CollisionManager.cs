@@ -76,6 +76,10 @@ namespace AHTWPong
                 // player one score logic here
                 game.Ding.Play();
                 Game1.player_two_score++;
+                if (Game1.player_two_score == Game1.SCORE_TO_WIN)
+                {
+                    game.Applause.Play();
+                }
                 game.state = GameState.PRE_GAME;
                 ball.Reset();
                 playerOne.Reset();
@@ -87,6 +91,10 @@ namespace AHTWPong
                 // player two score logic here
                 Game1.player_one_score++;
                 game.Ding.Play();
+                if (Game1.player_one_score == Game1.SCORE_TO_WIN)
+                {
+                    game.Applause.Play();
+                }
                 game.state = GameState.PRE_GAME;
                 ball.Reset();
                 playerOne.Reset();
