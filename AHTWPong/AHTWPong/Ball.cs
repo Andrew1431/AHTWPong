@@ -17,9 +17,10 @@ namespace AHTWPong
     /// </summary>
     public class Ball : DrawableGameComponent
     {
+        private const float MIN_X = 1.2f;
+
         SpriteBatch spriteBatch;
         Vector2 position, screenSize;
-        float speed, direction;
         public Vector2 Velocity;
         Texture2D texture;
         Game1 game;
@@ -61,19 +62,23 @@ namespace AHTWPong
         public void Launch()
         {
             Random r = new Random();
-            direction = (float)r.NextDouble();
-            speed = r.Next(3, 7);
+            float direction = (float)r.NextDouble();
+            float speed = r.Next(3, 7);
             float x = (float)Math.Cos((double)(direction * 2 * Math.PI)) * speed;
             float y = (float)Math.Sin((double)(direction * 2 * Math.PI)) * speed;
             Velocity = new Vector2(x, y);
+
+            // Prevent ball being launched too vertically
+            if (Velocity.X > 0 && Velocity.X < MIN_X) Velocity.X = MIN_X;
+            if (Velocity.X <= 0 && Velocity.X > -MIN_X) Velocity.X = -MIN_X;
+
+            
         }
 
         public void Reset()
         {
             position.X = screenSize.X / 2;
             position.Y = screenSize.Y / 2;
-            direction = 0;
-            speed = 0;
             Velocity = Vector2.Zero;
         }
 
