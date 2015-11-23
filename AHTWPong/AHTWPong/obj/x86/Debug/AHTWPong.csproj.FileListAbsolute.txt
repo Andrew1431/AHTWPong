@@ -16,3 +16,13 @@ C:\Users\Andrew\Documents\GitHub\AHTWPong\AHTWPong\AHTWPong\obj\x86\Debug\AHTWPo
 \\Mac\Home\Documents\Git\School\gameProgramming\AHTWPong\AHTWPong\AHTWPong\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 \\Mac\Home\Documents\Git\School\gameProgramming\AHTWPong\AHTWPong\AHTWPong\obj\x86\Debug\AHTWPong.exe
 \\Mac\Home\Documents\Git\School\gameProgramming\AHTWPong\AHTWPong\AHTWPong\obj\x86\Debug\AHTWPong.pdb
+\\Mac\Home\Documents\Git\School\gameProgramming\AHTWPong\AHTWPong\AHTWPong\bin\x86\Debug\Content\fonts\SpriteFont1.xnb
+\\Mac\Home\Documents\Git\School\gameProgramming\AHTWPong\AHTWPong\AHTWPong\bin\x86\Debug\Content\images\Ball.xnb
+\\Mac\Home\Documents\Git\School\gameProgramming\AHTWPong\AHTWPong\AHTWPong\bin\x86\Debug\Content\images\BatLeft.xnb
+\\Mac\Home\Documents\Git\School\gameProgramming\AHTWPong\AHTWPong\AHTWPong\bin\x86\Debug\Content\images\BatRight.xnb
+\\Mac\Home\Documents\Git\School\gameProgramming\AHTWPong\AHTWPong\AHTWPong\bin\x86\Debug\Content\images\Scorebar.xnb
+\\Mac\Home\Documents\Git\School\gameProgramming\AHTWPong\AHTWPong\AHTWPong\bin\x86\Debug\Content\audio\applause1.xnb
+\\Mac\Home\Documents\Git\School\gameProgramming\AHTWPong\AHTWPong\AHTWPong\bin\x86\Debug\Content\audio\click.xnb
+\\Mac\Home\Documents\Git\School\gameProgramming\AHTWPong\AHTWPong\AHTWPong\bin\x86\Debug\Content\audio\ding.xnb
+\\Mac\Home\Documents\Git\School\gameProgramming\AHTWPong\AHTWPong\AHTWPong\bin\x86\Debug\AHTWPong.exe
+\\Mac\Home\Documents\Git\School\gameProgramming\AHTWPong\AHTWPong\AHTWPong\bin\x86\Debug\AHTWPong.pdb
