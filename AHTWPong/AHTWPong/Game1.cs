@@ -38,6 +38,7 @@ namespace AHTWPong
         CollisionManager collisions;
         public Score score;
         public Score winMessage;
+        public Boolean flag;
 
         public Vector2 ScreenSize
         {
@@ -145,12 +146,13 @@ namespace AHTWPong
                 ball.Launch();
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.R) && (state == GameState.GAME))
+            if (Keyboard.GetState().IsKeyDown(Keys.R) && (state == GameState.POST_GAME))
             {
                 state = GameState.PRE_GAME;
                 ball.Reset();
                 playerOne.Reset();
                 playerTwo.Reset();
+                flag = true;
             }
 
             // TODO: Add your update logic here
@@ -174,6 +176,9 @@ namespace AHTWPong
         public void winner(string winner)
         {
             state = GameState.POST_GAME;
+
+            //should only play once.
+            //TODO: do this one.
             Applause.Play();
             string winMessageString = "Congratulations " + winner;
             Vector2 dimension = font.MeasureString(winMessageString);
