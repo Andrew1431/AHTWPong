@@ -22,6 +22,7 @@ namespace AHTWPong
         public GameState state;
         public static int player_one_score = 0;
         public static int player_two_score = 0;
+        public SoundEffect Click, Applause, Ding;
 
         GraphicsDeviceManager graphics;
         SpriteFont font;
@@ -31,8 +32,6 @@ namespace AHTWPong
         Vector2 screenSize;
         CollisionManager collisions;
         public Score score;
-
-        public SoundEffect Click, Applause, Ding;
 
         public Vector2 ScreenSize
         {
@@ -73,8 +72,8 @@ namespace AHTWPong
             Texture2D paddleRight = Content.Load<Texture2D>("images/BatRight");
             Texture2D ball = Content.Load<Texture2D>("images/Ball");
             font = Content.Load<SpriteFont>("fonts/SpriteFont1");
-            Applause = Content.Load<SoundEffect>("audio/applause1");
             Click = Content.Load<SoundEffect>("audio/click");
+            Applause = Content.Load<SoundEffect>("audio/applause1");
             Ding = Content.Load<SoundEffect>("audio/ding");
 
             screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
@@ -119,6 +118,13 @@ namespace AHTWPong
             // Score
             string scoreMessage = "Player One: " + player_one_score.ToString() + "\nPlayer Two: " + player_two_score.ToString();
             score.ScoreString = scoreMessage;
+            if (player_one_score == 3 || player_two_score == 3)
+            {
+                state = GameState.POST_GAME;
+                ball.Reset();
+                playerOne.Reset();
+                playerTwo.Reset();
+            }
 
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))

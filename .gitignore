@@ -10,3 +10,5 @@ AHTWPong/AHTWPong/obj
 AHTWPongGame/AHTWPongContent/obj
 *.cachefile
 *.ccgame
+AHTWPong/AHTWPongContent/obj/x86/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+AHTWPong/AHTWPongContent/obj/x86/Debug/AHTWPongContent.contentprojResolveAssemblyReference.cache
