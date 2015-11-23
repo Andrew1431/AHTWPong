@@ -28,6 +28,8 @@ namespace AHTWPong
         Vector2 screenSize;
         CollisionManager collisions;
 
+        public SoundEffect Applause, Click, Ding;
+
         public Vector2 ScreenSize
         {
             get { return screenSize; }
@@ -66,6 +68,9 @@ namespace AHTWPong
             Texture2D paddleLeft = Content.Load<Texture2D>("images/BatLeft");
             Texture2D paddleRight = Content.Load<Texture2D>("images/BatRight");
             Texture2D ball = Content.Load<Texture2D>("images/Ball");
+            Applause = Content.Load<SoundEffect>("audio/applause1");
+            Click = Content.Load<SoundEffect>("audio/click");
+            Ding = Content.Load<SoundEffect>("audio/ding");
 
             screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 

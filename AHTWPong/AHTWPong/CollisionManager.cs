@@ -57,21 +57,29 @@ namespace AHTWPong
             playerOne = game.playerOne;
             playerTwo = game.playerTwo;
 
+            // Paddle hit
             if ((Rectangle.Intersect(ball.GetCollisionRectangle(), playerOne.GetCollisionRectangle()).Width > 0 && ball.Velocity.X < 0)
                     || (Rectangle.Intersect(ball.GetCollisionRectangle(), playerTwo.GetCollisionRectangle()).Width > 0 && ball.Velocity.X > 0))
             {
+                game.Click.Play();
                 ball.Velocity.X = -ball.Velocity.X;
             }
+            // Ceiling / Bottom hit
             else if (ball.Position.Y - ball.Texture.Height / 2 < 0 || ball.Position.Y + ball.Texture.Height / 2 > game.ScreenSize.Y)
             {
+                game.Click.Play();
                 ball.Velocity.Y = -ball.Velocity.Y;
             }
+            // Left paddle hit
             else if (ball.Position.X - ball.Texture.Width / 2 < 0)
             {
+                game.Ding.Play();
                 // player one score logic here
             }
+            // Right paddle hit
             else if (ball.Position.X + ball.Texture.Width / 2 > game.ScreenSize.X)
             {
+                game.Ding.Play();
                 // player two score logic here
             }
 
