@@ -17,11 +17,16 @@ namespace AHTWPong
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
+        //Setup game.
         public const int PLAYER_ONE = 1;
         public const int PLAYER_TWO = 2;
-        public GameState state;
+        public const string PLAYER_ONE_NAME = "Taylor";
+        public const string PLAYER_TWO_NAME = "Andrew";
+        public const int SCORE_TO_WIN = 3;
         public static int player_one_score = 0;
         public static int player_two_score = 0;
+        
+        public GameState state;
         public SoundEffect Click, Applause, Ding;
 
         GraphicsDeviceManager graphics;
@@ -32,6 +37,7 @@ namespace AHTWPong
         Vector2 screenSize;
         CollisionManager collisions;
         public Score score;
+        public Score winMessage;
 
         public Vector2 ScreenSize
         {
@@ -75,7 +81,6 @@ namespace AHTWPong
             Click = Content.Load<SoundEffect>("audio/click");
             Applause = Content.Load<SoundEffect>("audio/applause1");
             Ding = Content.Load<SoundEffect>("audio/ding");
-
             screenSize = new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
 
             this.state = GameState.PRE_GAME;
@@ -85,11 +90,14 @@ namespace AHTWPong
             this.ball = new Ball(this, spriteBatch, ball, new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2), new Vector2(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight));
             collisions = new CollisionManager(this);
 
+            string winMessageString = "";
             string scoreString = "";
             Vector2 scorePosition = Vector2.Zero;
+            Vector2 winMessagePosition = new Vector2(graphics.PreferredBackBufferWidth /2, graphics.PreferredBackBufferHeight /2);
             score = new Score(this, spriteBatch, font, scorePosition, scoreString, Color.White);
-
-
+            winMessage = new Score(this, spriteBatch, font, winMessagePosition, winMessageString, Color.AliceBlue);
+            winMessage.Visible = false;
+            Components.Add(winMessage);
             Components.Add(score);
             Components.Add(playerOne);
             Components.Add(playerTwo);
@@ -116,14 +124,15 @@ namespace AHTWPong
         protected override void Update(GameTime gameTime)
         {
             // Score
-            string scoreMessage = "Player One: " + player_one_score.ToString() + "\nPlayer Two: " + player_two_score.ToString();
+            string scoreMessage = string.Format("{0}: {1}\n{2}: {3}", PLAYER_ONE_NAME, player_one_score.ToString(), PLAYER_TWO_NAME, player_two_score.ToString());
             score.ScoreString = scoreMessage;
-            if (player_one_score == 3 || player_two_score == 3)
+            if (player_one_score == SCORE_TO_WIN)
             {
-                state = GameState.POST_GAME;
-                ball.Reset();
-                playerOne.Reset();
-                playerTwo.Reset();
+                winner(PLAYER_ONE_NAME);
+            }
+            else if (player_two_score == SCORE_TO_WIN)
+            {
+                winner(PLAYER_TWO_NAME);
             }
 
             // Allows the game to exit
@@ -160,6 +169,21 @@ namespace AHTWPong
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+        }
+
+        public void winner(string winner)
+        {
+            state = GameState.POST_GAME;
+            Applause.Play();
+            string winMessageString = "Congratulations " + winner;
+            Vector2 dimension = font.MeasureString(winMessageString);
+            Vector2 messagePos = new Vector2(graphics.PreferredBackBufferWidth / 2 - dimension.X / 2, graphics.PreferredBackBufferHeight / 2 - dimension.Y / 2);
+            winMessage.ScoreString = winMessageString;
+            winMessage.Position = messagePos;
+            winMessage.Visible = true;
+            ball.Reset();
+            playerOne.Reset();
+            playerTwo.Reset();
         }
     }
 }

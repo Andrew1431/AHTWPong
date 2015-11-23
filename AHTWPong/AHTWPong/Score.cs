@@ -20,6 +20,12 @@ namespace AHTWPong
         private SpriteBatch spriteBatch;
         private SpriteFont font;
         private Vector2 position;
+
+        public Vector2 Position
+        {
+            get { return position; }
+            set { position = value; }
+        }
         private string scoreString;
 
         public string ScoreString
