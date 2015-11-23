@@ -70,12 +70,17 @@ namespace AHTWPong
             {
                 // player one score logic here
                 Game1.player_one_score++;
-               
+                ball.Reset();
+                playerOne.Reset();
+                playerTwo.Reset();
             }
             else if (ball.Position.X + ball.Texture.Width / 2 > game.ScreenSize.X)
             {
                 // player two score logic here
                 Game1.player_two_score++;
+                ball.Reset();
+                playerOne.Reset();
+                playerTwo.Reset();
             }
 
 
