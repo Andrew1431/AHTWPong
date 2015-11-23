@@ -5,7 +5,6 @@
 *.suo
 *.user
 AHTWPong/AHTWPong/bin
-AHTWPong/AHTWPong/bin/
 AHTWPong/AHTWPongContent/bin
 AHTWPong/AHTWPong/obj
 AHTWPongGame/AHTWPongContent/obj

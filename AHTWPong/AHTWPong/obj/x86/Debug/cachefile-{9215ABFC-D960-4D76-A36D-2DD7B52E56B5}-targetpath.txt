@@ -1,8 +1,0 @@
-Content\fonts\SpriteFont1.xnb
-Content\images\Ball.xnb
-Content\images\BatLeft.xnb
-Content\images\BatRight.xnb
-Content\images\Scorebar.xnb
-Content\audio\applause1.xnb
-Content\audio\click.xnb
-Content\audio\ding.xnb
